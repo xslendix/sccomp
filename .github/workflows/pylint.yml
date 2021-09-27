@@ -20,7 +20,6 @@ jobs:
     - name: Install requirements
       run: |
         pip install -r requirements.txt
-        pip install -r requirements_facetracking.txt
     - name: Analysing the code with pylint
       run: |
         pylint --rcfile .pylintrc `ls -R|grep .py$|xargs`
