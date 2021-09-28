@@ -295,13 +295,13 @@ if __name__ == '__main__':
                 os.makedirs(file_parent, exist_ok=True)
 
                 if not args.pdf:
-                    output = HTML_HEADER + pypandoc.convert_file(str(file), OUTPUT_FORMAT, format='md') + HTML_FOOTER
+                    output = HTML_HEADER + pypandoc.convert_file(str(file), OUTPUT_FORMAT, format='md', extra_args=['--mathjax']) + HTML_FOOTER
                     with open(output_file, 'w+') as f:
                         f.write(output)
                         f.close()
                 else:
                     pypandoc.convert_file(str(file), 'pdf', format='md', outputfile=output_file,
-                        extra_args=['-V', 'geometry:margin=1in', f'--resource-path={file_parent}'])
+                        extra_args=['-V', 'geometry:margin=1in', f'--resource-path={file_parent}', '--mathjax'])
             elif file_extension in ('.png', '.jpg', '.jpeg', '.sh', '.in') or filename == 'Makefile':
                 print(f'Copying asset `{file_path}`')
                 file_parent = args.output + '/' + os.sep.join(filename.split(os.sep)[:-1])
